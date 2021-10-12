@@ -1,0 +1,1287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Edmx Version="3.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <Runtime>
+    <ConceptualModels>
+      <Schema Namespace="BugFeed.Database" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comentario" customannotation:ClrType="BugFeed.Database.Comentario, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Abstract="true">
+          <Key>
+            <PropertyRef Name="ComentarioId" />
+          </Key>
+          <Property Name="ComentarioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Conteudo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DataHora" Type="DateTime" Nullable="false" />
+          <Property Name="Apagado" Type="Boolean" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" />
+          <Property Name="UltimaRevisao" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.Comentario_Usuario" FromRole="Comentario_Usuario_Source" ToRole="Comentario_Usuario_Target" />
+        </EntityType>
+        <EntityType Name="Usuario" customannotation:ClrType="BugFeed.Database.Usuario, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Abstract="true">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sobrenome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Senha" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <Property Name="DataNascimento" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Email" Relationship="Self.Usuario_Email" FromRole="Usuario_Email_Source" ToRole="Usuario_Email_Target" />
+        </EntityType>
+        <EntityType Name="Email" customannotation:ClrType="BugFeed.Database.Email, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="EmailId" Type="Int32" Nullable="false" />
+          <Property Name="Endereco" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Confirmado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.Usuario_Email" FromRole="Usuario_Email_Target" ToRole="Usuario_Email_Source" />
+        </EntityType>
+        <EntityType Name="Funcionario" customannotation:ClrType="BugFeed.Database.Funcionario, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.Usuario">
+          <NavigationProperty Name="Grupo" Relationship="Self.Funcionario_Grupo" FromRole="Funcionario_Grupo_Source" ToRole="Funcionario_Grupo_Target" />
+        </EntityType>
+        <EntityType Name="GrupoFuncionarios" customannotation:ClrType="BugFeed.Database.GrupoFuncionarios, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="GrupoFuncionariosId" />
+          </Key>
+          <Property Name="GrupoFuncionariosId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Permissoes" Relationship="Self.GrupoFuncionarios_Permissoes" FromRole="GrupoFuncionarios_Permissoes_Source" ToRole="GrupoFuncionarios_Permissoes_Target" />
+        </EntityType>
+        <EntityType Name="Permissao" customannotation:ClrType="BugFeed.Database.Permissao, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="PermissaoId" />
+          </Key>
+          <Property Name="PermissaoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Perfil" Type="Self.Perfil" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pesquisador" customannotation:ClrType="BugFeed.Database.Pesquisador, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.Usuario">
+          <NavigationProperty Name="DadosBancarios" Relationship="Self.DadosBancarios_Pesquisador" FromRole="DadosBancarios_Pesquisador_Target" ToRole="DadosBancarios_Pesquisador_Source" />
+          <NavigationProperty Name="Endereco" Relationship="Self.Pesquisador_Endereco" FromRole="Pesquisador_Endereco_Source" ToRole="Pesquisador_Endereco_Target" />
+          <NavigationProperty Name="Formacoes" Relationship="Self.Pesquisador_Formacoes" FromRole="Pesquisador_Formacoes_Source" ToRole="Pesquisador_Formacoes_Target" />
+          <NavigationProperty Name="Recompensas" Relationship="Self.Recompensa_Pesquisador" FromRole="Recompensa_Pesquisador_Target" ToRole="Recompensa_Pesquisador_Source" />
+          <NavigationProperty Name="Retiradas" Relationship="Self.Retirada_Pesquisador" FromRole="Retirada_Pesquisador_Target" ToRole="Retirada_Pesquisador_Source" />
+        </EntityType>
+        <EntityType Name="DadosBancarios" customannotation:ClrType="BugFeed.Database.DadosBancarios, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="DadosBancariosId" />
+          </Key>
+          <Property Name="DadosBancariosId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CPF" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Agencia" Type="Int32" Nullable="false" />
+          <Property Name="DigitoAgencia" Type="Int32" Nullable="false" />
+          <Property Name="Conta" Type="Int32" Nullable="false" />
+          <Property Name="DigitoConta" Type="Int32" Nullable="false" />
+          <Property Name="Confirmado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Pesquisador" Relationship="Self.DadosBancarios_Pesquisador" FromRole="DadosBancarios_Pesquisador_Source" ToRole="DadosBancarios_Pesquisador_Target" />
+        </EntityType>
+        <EntityType Name="Endereco" customannotation:ClrType="BugFeed.Database.Endereco, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="EnderecoId" />
+          </Key>
+          <Property Name="EnderecoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Destinatario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Organizacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Linha1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Linha2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Linha3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Bairro" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CEP" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pais" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Formacao" customannotation:ClrType="BugFeed.Database.Formacao, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="FormacaoId" />
+          </Key>
+          <Property Name="FormacaoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoFormacao" Type="Self.TipoFormacao" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recompensa" customannotation:ClrType="BugFeed.Database.Recompensa, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="RecompensaId" />
+          </Key>
+          <Property Name="RecompensaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Valor" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Processada" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Avaliador" Relationship="Self.Recompensa_Avaliador" FromRole="Recompensa_Avaliador_Source" ToRole="Recompensa_Avaliador_Target" />
+          <NavigationProperty Name="Pagador" Relationship="Self.Recompensa_Pagador" FromRole="Recompensa_Pagador_Source" ToRole="Recompensa_Pagador_Target" />
+          <NavigationProperty Name="Pesquisador" Relationship="Self.Recompensa_Pesquisador" FromRole="Recompensa_Pesquisador_Source" ToRole="Recompensa_Pesquisador_Target" />
+          <NavigationProperty Name="Programa" Relationship="Self.Recompensa_Programa" FromRole="Recompensa_Programa_Source" ToRole="Recompensa_Programa_Target" />
+        </EntityType>
+        <EntityType Name="ProgramaRecompensas" customannotation:ClrType="BugFeed.Database.ProgramaRecompensas, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="ProgramaRecompensasId" />
+          </Key>
+          <Property Name="ProgramaRecompensasId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <Property Name="DataCriacao" Type="DateTime" Nullable="false" />
+          <Property Name="UltimaRevisao" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Comentarios" Relationship="Self.ComentarioPrograma_Programa" FromRole="ComentarioPrograma_Programa_Target" ToRole="ComentarioPrograma_Programa_Source" />
+          <NavigationProperty Name="Empresa" Relationship="Self.ProgramaRecompensas_Empresa" FromRole="ProgramaRecompensas_Empresa_Source" ToRole="ProgramaRecompensas_Empresa_Target" />
+          <NavigationProperty Name="Recompensas" Relationship="Self.Recompensa_Programa" FromRole="Recompensa_Programa_Target" ToRole="Recompensa_Programa_Source" />
+          <NavigationProperty Name="Relatorios" Relationship="Self.RelatorioBug_Programa" FromRole="RelatorioBug_Programa_Target" ToRole="RelatorioBug_Programa_Source" />
+        </EntityType>
+        <EntityType Name="ComentarioPrograma" customannotation:ClrType="BugFeed.Database.ComentarioPrograma, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.Comentario">
+          <NavigationProperty Name="Programa" Relationship="Self.ComentarioPrograma_Programa" FromRole="ComentarioPrograma_Programa_Source" ToRole="ComentarioPrograma_Programa_Target" />
+        </EntityType>
+        <EntityType Name="Empresa" customannotation:ClrType="BugFeed.Database.Empresa, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="EmpresaId" />
+          </Key>
+          <Property Name="EmpresaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Site" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CNPJ" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Endereco" Relationship="Self.Empresa_Endereco" FromRole="Empresa_Endereco_Source" ToRole="Empresa_Endereco_Target" />
+          <NavigationProperty Name="Funcionarios" Relationship="Self.Empresa_Funcionarios" FromRole="Empresa_Funcionarios_Source" ToRole="Empresa_Funcionarios_Target" />
+          <NavigationProperty Name="Programas" Relationship="Self.ProgramaRecompensas_Empresa" FromRole="ProgramaRecompensas_Empresa_Target" ToRole="ProgramaRecompensas_Empresa_Source" />
+        </EntityType>
+        <EntityType Name="RelatorioBug" customannotation:ClrType="BugFeed.Database.RelatorioBug, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="RelatorioBugId" />
+          </Key>
+          <Property Name="RelatorioBugId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Impacto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Estado" Type="Self.EstadoRelatorioBug" Nullable="false" />
+          <NavigationProperty Name="Comentarios" Relationship="Self.ComentarioRelatorio_Relatorio" FromRole="ComentarioRelatorio_Relatorio_Target" ToRole="ComentarioRelatorio_Relatorio_Source" />
+          <NavigationProperty Name="Pesquisador" Relationship="Self.RelatorioBug_Pesquisador" FromRole="RelatorioBug_Pesquisador_Source" ToRole="RelatorioBug_Pesquisador_Target" />
+          <NavigationProperty Name="Programa" Relationship="Self.RelatorioBug_Programa" FromRole="RelatorioBug_Programa_Source" ToRole="RelatorioBug_Programa_Target" />
+        </EntityType>
+        <EntityType Name="ComentarioRelatorio" customannotation:ClrType="BugFeed.Database.ComentarioRelatorio, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" BaseType="Self.Comentario">
+          <NavigationProperty Name="Relatorio" Relationship="Self.ComentarioRelatorio_Relatorio" FromRole="ComentarioRelatorio_Relatorio_Source" ToRole="ComentarioRelatorio_Relatorio_Target" />
+        </EntityType>
+        <EntityType Name="Retirada" customannotation:ClrType="BugFeed.Database.Retirada, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="RetiradaId" />
+          </Key>
+          <Property Name="RetiradaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Valor" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" />
+          <Property Name="Estado" Type="Self.EstadoRetirada" Nullable="false" />
+          <NavigationProperty Name="DadosBancarios" Relationship="Self.Retirada_DadosBancarios" FromRole="Retirada_DadosBancarios_Source" ToRole="Retirada_DadosBancarios_Target" />
+          <NavigationProperty Name="Pesquisador" Relationship="Self.Retirada_Pesquisador" FromRole="Retirada_Pesquisador_Source" ToRole="Retirada_Pesquisador_Target" />
+        </EntityType>
+        <EnumType Name="Perfil" IsFlags="false" customannotation:ClrType="BugFeed.Database.Perfil, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" UnderlyingType="Int32">
+          <Member Name="Admin" Value="0" />
+          <Member Name="Reward" Value="1" />
+          <Member Name="Report" Value="2" />
+          <Member Name="Program" Value="3" />
+        </EnumType>
+        <EnumType Name="TipoFormacao" IsFlags="false" customannotation:ClrType="BugFeed.Database.TipoFormacao, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" UnderlyingType="Int32">
+          <Member Name="Bacharelado" Value="0" />
+          <Member Name="Licenciatura" Value="1" />
+          <Member Name="Tecnologico" Value="2" />
+          <Member Name="Sequencial" Value="3" />
+          <Member Name="GraduacaoModulada" Value="4" />
+          <Member Name="EAD" Value="5" />
+        </EnumType>
+        <EnumType Name="EstadoRelatorioBug" IsFlags="false" customannotation:ClrType="BugFeed.Database.EstadoRelatorioBug, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" UnderlyingType="Int32">
+          <Member Name="Enviado" Value="0" />
+          <Member Name="EmAnalise" Value="1" />
+          <Member Name="Concluido" Value="2" />
+        </EnumType>
+        <EnumType Name="EstadoRetirada" IsFlags="false" customannotation:ClrType="BugFeed.Database.EstadoRetirada, BugFeed.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" UnderlyingType="Int32">
+          <Member Name="EmProgresso" Value="0" />
+          <Member Name="Concluida" Value="1" />
+          <Member Name="Indeferida" Value="2" />
+        </EnumType>
+        <Association Name="Usuario_Email">
+          <End Role="Usuario_Email_Source" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Usuario_Email_Target" Type="Self.Email" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario_Email_Source">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Usuario_Email_Target">
+              <PropertyRef Name="EmailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GrupoFuncionarios_Permissoes">
+          <End Role="GrupoFuncionarios_Permissoes_Source" Type="Self.GrupoFuncionarios" Multiplicity="0..1" />
+          <End Role="GrupoFuncionarios_Permissoes_Target" Type="Self.Permissao" Multiplicity="*" />
+        </Association>
+        <Association Name="Funcionario_Grupo">
+          <End Role="Funcionario_Grupo_Source" Type="Self.Funcionario" Multiplicity="*" />
+          <End Role="Funcionario_Grupo_Target" Type="Self.GrupoFuncionarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+        </Association>
+        <Association Name="DadosBancarios_Pesquisador">
+          <End Role="DadosBancarios_Pesquisador_Source" Type="Self.DadosBancarios" Multiplicity="*" />
+          <End Role="DadosBancarios_Pesquisador_Target" Type="Self.Pesquisador" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+        </Association>
+        <Association Name="Pesquisador_Endereco">
+          <End Role="Pesquisador_Endereco_Source" Type="Self.Pesquisador" Multiplicity="*" />
+          <End Role="Pesquisador_Endereco_Target" Type="Self.Endereco" Multiplicity="0..1" />
+        </Association>
+        <Association Name="Pesquisador_Formacoes">
+          <End Role="Pesquisador_Formacoes_Source" Type="Self.Pesquisador" Multiplicity="0..1" />
+          <End Role="Pesquisador_Formacoes_Target" Type="Self.Formacao" Multiplicity="*" />
+        </Association>
+        <Association Name="Recompensa_Avaliador">
+          <End Role="Recompensa_Avaliador_Source" Type="Self.Recompensa" Multiplicity="*" />
+          <End Role="Recompensa_Avaliador_Target" Type="Self.Funcionario" Multiplicity="0..1" />
+        </Association>
+        <Association Name="Recompensa_Pagador">
+          <End Role="Recompensa_Pagador_Source" Type="Self.Recompensa" Multiplicity="*" />
+          <End Role="Recompensa_Pagador_Target" Type="Self.Funcionario" Multiplicity="0..1" />
+        </Association>
+        <Association Name="Recompensa_Pesquisador">
+          <End Role="Recompensa_Pesquisador_Source" Type="Self.Recompensa" Multiplicity="*" />
+          <End Role="Recompensa_Pesquisador_Target" Type="Self.Pesquisador" Multiplicity="0..1" />
+        </Association>
+        <Association Name="ComentarioPrograma_Programa">
+          <End Role="ComentarioPrograma_Programa_Source" Type="Self.ComentarioPrograma" Multiplicity="*" />
+          <End Role="ComentarioPrograma_Programa_Target" Type="Self.ProgramaRecompensas" Multiplicity="0..1" />
+        </Association>
+        <Association Name="Empresa_Endereco">
+          <End Role="Empresa_Endereco_Source" Type="Self.Empresa" Multiplicity="*" />
+          <End Role="Empresa_Endereco_Target" Type="Self.Endereco" Multiplicity="0..1" />
+        </Association>
+        <Association Name="Empresa_Funcionarios">
+          <End Role="Empresa_Funcionarios_Source" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Empresa_Funcionarios_Target" Type="Self.Funcionario" Multiplicity="*" />
+        </Association>
+        <Association Name="ProgramaRecompensas_Empresa">
+          <End Role="ProgramaRecompensas_Empresa_Source" Type="Self.ProgramaRecompensas" Multiplicity="*" />
+          <End Role="ProgramaRecompensas_Empresa_Target" Type="Self.Empresa" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+        </Association>
+        <Association Name="ComentarioRelatorio_Relatorio">
+          <End Role="ComentarioRelatorio_Relatorio_Source" Type="Self.ComentarioRelatorio" Multiplicity="*" />
+          <End Role="ComentarioRelatorio_Relatorio_Target" Type="Self.RelatorioBug" Multiplicity="0..1" />
+        </Association>
+        <Association Name="RelatorioBug_Pesquisador">
+          <End Role="RelatorioBug_Pesquisador_Source" Type="Self.RelatorioBug" Multiplicity="*" />
+          <End Role="RelatorioBug_Pesquisador_Target" Type="Self.Pesquisador" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+        </Association>
+        <Association Name="RelatorioBug_Programa">
+          <End Role="RelatorioBug_Programa_Source" Type="Self.RelatorioBug" Multiplicity="*" />
+          <End Role="RelatorioBug_Programa_Target" Type="Self.ProgramaRecompensas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+        </Association>
+        <Association Name="Recompensa_Programa">
+          <End Role="Recompensa_Programa_Source" Type="Self.Recompensa" Multiplicity="*" />
+          <End Role="Recompensa_Programa_Target" Type="Self.ProgramaRecompensas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+        </Association>
+        <Association Name="Retirada_DadosBancarios">
+          <End Role="Retirada_DadosBancarios_Source" Type="Self.Retirada" Multiplicity="*" />
+          <End Role="Retirada_DadosBancarios_Target" Type="Self.DadosBancarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+        </Association>
+        <Association Name="Retirada_Pesquisador">
+          <End Role="Retirada_Pesquisador_Source" Type="Self.Retirada" Multiplicity="*" />
+          <End Role="Retirada_Pesquisador_Target" Type="Self.Pesquisador" Multiplicity="0..1" />
+        </Association>
+        <Association Name="Comentario_Usuario">
+          <End Role="Comentario_Usuario_Source" Type="Self.Comentario" Multiplicity="*" />
+          <End Role="Comentario_Usuario_Target" Type="Self.Usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+        </Association>
+        <EntityContainer Name="BugFeedContext" customannotation:UseClrTypes="true">
+          <EntitySet Name="Comentarios" EntityType="Self.Comentario" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+          <EntitySet Name="Emails" EntityType="Self.Email" />
+          <EntitySet Name="GruposFuncionarios" EntityType="Self.GrupoFuncionarios" />
+          <EntitySet Name="Permissoes" EntityType="Self.Permissao" />
+          <EntitySet Name="DadosBancarios" EntityType="Self.DadosBancarios" />
+          <EntitySet Name="Enderecos" EntityType="Self.Endereco" />
+          <EntitySet Name="Formacoes" EntityType="Self.Formacao" />
+          <EntitySet Name="Recompensas" EntityType="Self.Recompensa" />
+          <EntitySet Name="ProgramasRecompensas" EntityType="Self.ProgramaRecompensas" />
+          <EntitySet Name="Empresas" EntityType="Self.Empresa" />
+          <EntitySet Name="RelatoriosBug" EntityType="Self.RelatorioBug" />
+          <EntitySet Name="Retiradas" EntityType="Self.Retirada" />
+          <AssociationSet Name="Usuario_Email" Association="Self.Usuario_Email">
+            <End Role="Usuario_Email_Source" EntitySet="Usuarios" />
+            <End Role="Usuario_Email_Target" EntitySet="Emails" />
+          </AssociationSet>
+          <AssociationSet Name="GrupoFuncionarios_Permissoes" Association="Self.GrupoFuncionarios_Permissoes">
+            <End Role="GrupoFuncionarios_Permissoes_Source" EntitySet="GruposFuncionarios" />
+            <End Role="GrupoFuncionarios_Permissoes_Target" EntitySet="Permissoes" />
+          </AssociationSet>
+          <AssociationSet Name="Funcionario_Grupo" Association="Self.Funcionario_Grupo">
+            <End Role="Funcionario_Grupo_Source" EntitySet="Usuarios" />
+            <End Role="Funcionario_Grupo_Target" EntitySet="GruposFuncionarios" />
+          </AssociationSet>
+          <AssociationSet Name="DadosBancarios_Pesquisador" Association="Self.DadosBancarios_Pesquisador">
+            <End Role="DadosBancarios_Pesquisador_Source" EntitySet="DadosBancarios" />
+            <End Role="DadosBancarios_Pesquisador_Target" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="Pesquisador_Endereco" Association="Self.Pesquisador_Endereco">
+            <End Role="Pesquisador_Endereco_Source" EntitySet="Usuarios" />
+            <End Role="Pesquisador_Endereco_Target" EntitySet="Enderecos" />
+          </AssociationSet>
+          <AssociationSet Name="Pesquisador_Formacoes" Association="Self.Pesquisador_Formacoes">
+            <End Role="Pesquisador_Formacoes_Source" EntitySet="Usuarios" />
+            <End Role="Pesquisador_Formacoes_Target" EntitySet="Formacoes" />
+          </AssociationSet>
+          <AssociationSet Name="Recompensa_Avaliador" Association="Self.Recompensa_Avaliador">
+            <End Role="Recompensa_Avaliador_Source" EntitySet="Recompensas" />
+            <End Role="Recompensa_Avaliador_Target" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="Recompensa_Pagador" Association="Self.Recompensa_Pagador">
+            <End Role="Recompensa_Pagador_Source" EntitySet="Recompensas" />
+            <End Role="Recompensa_Pagador_Target" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="Recompensa_Pesquisador" Association="Self.Recompensa_Pesquisador">
+            <End Role="Recompensa_Pesquisador_Source" EntitySet="Recompensas" />
+            <End Role="Recompensa_Pesquisador_Target" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="ComentarioPrograma_Programa" Association="Self.ComentarioPrograma_Programa">
+            <End Role="ComentarioPrograma_Programa_Source" EntitySet="Comentarios" />
+            <End Role="ComentarioPrograma_Programa_Target" EntitySet="ProgramasRecompensas" />
+          </AssociationSet>
+          <AssociationSet Name="Empresa_Endereco" Association="Self.Empresa_Endereco">
+            <End Role="Empresa_Endereco_Source" EntitySet="Empresas" />
+            <End Role="Empresa_Endereco_Target" EntitySet="Enderecos" />
+          </AssociationSet>
+          <AssociationSet Name="Empresa_Funcionarios" Association="Self.Empresa_Funcionarios">
+            <End Role="Empresa_Funcionarios_Source" EntitySet="Empresas" />
+            <End Role="Empresa_Funcionarios_Target" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="ProgramaRecompensas_Empresa" Association="Self.ProgramaRecompensas_Empresa">
+            <End Role="ProgramaRecompensas_Empresa_Source" EntitySet="ProgramasRecompensas" />
+            <End Role="ProgramaRecompensas_Empresa_Target" EntitySet="Empresas" />
+          </AssociationSet>
+          <AssociationSet Name="ComentarioRelatorio_Relatorio" Association="Self.ComentarioRelatorio_Relatorio">
+            <End Role="ComentarioRelatorio_Relatorio_Source" EntitySet="Comentarios" />
+            <End Role="ComentarioRelatorio_Relatorio_Target" EntitySet="RelatoriosBug" />
+          </AssociationSet>
+          <AssociationSet Name="RelatorioBug_Pesquisador" Association="Self.RelatorioBug_Pesquisador">
+            <End Role="RelatorioBug_Pesquisador_Source" EntitySet="RelatoriosBug" />
+            <End Role="RelatorioBug_Pesquisador_Target" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="RelatorioBug_Programa" Association="Self.RelatorioBug_Programa">
+            <End Role="RelatorioBug_Programa_Source" EntitySet="RelatoriosBug" />
+            <End Role="RelatorioBug_Programa_Target" EntitySet="ProgramasRecompensas" />
+          </AssociationSet>
+          <AssociationSet Name="Recompensa_Programa" Association="Self.Recompensa_Programa">
+            <End Role="Recompensa_Programa_Source" EntitySet="Recompensas" />
+            <End Role="Recompensa_Programa_Target" EntitySet="ProgramasRecompensas" />
+          </AssociationSet>
+          <AssociationSet Name="Retirada_DadosBancarios" Association="Self.Retirada_DadosBancarios">
+            <End Role="Retirada_DadosBancarios_Source" EntitySet="Retiradas" />
+            <End Role="Retirada_DadosBancarios_Target" EntitySet="DadosBancarios" />
+          </AssociationSet>
+          <AssociationSet Name="Retirada_Pesquisador" Association="Self.Retirada_Pesquisador">
+            <End Role="Retirada_Pesquisador_Source" EntitySet="Retiradas" />
+            <End Role="Retirada_Pesquisador_Target" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="Comentario_Usuario" Association="Self.Comentario_Usuario">
+            <End Role="Comentario_Usuario_Source" EntitySet="Comentarios" />
+            <End Role="Comentario_Usuario_Target" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </ConceptualModels>
+    <Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CodeFirstDatabase" CdmEntityContainer="BugFeedContext">
+          <EntitySetMapping Name="Comentarios">
+            <EntityTypeMapping TypeName="IsTypeOf(BugFeed.Database.Comentario)">
+              <MappingFragment StoreEntitySet="Comentario">
+                <ScalarProperty Name="ComentarioId" ColumnName="ComentarioId" />
+                <ScalarProperty Name="Conteudo" ColumnName="Conteudo" />
+                <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+                <ScalarProperty Name="Apagado" ColumnName="Apagado" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="UltimaRevisao" ColumnName="UltimaRevisao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="BugFeed.Database.ComentarioPrograma">
+              <MappingFragment StoreEntitySet="Comentario">
+                <ScalarProperty Name="ComentarioId" ColumnName="ComentarioId" />
+                <Condition Value="ComentarioPrograma" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="BugFeed.Database.ComentarioRelatorio">
+              <MappingFragment StoreEntitySet="Comentario">
+                <ScalarProperty Name="ComentarioId" ColumnName="ComentarioId" />
+                <Condition Value="ComentarioRelatorio" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="IsTypeOf(BugFeed.Database.Usuario)">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Sobrenome" ColumnName="Sobrenome" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="BugFeed.Database.Funcionario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <Condition Value="Funcionario" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="BugFeed.Database.Pesquisador">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <Condition Value="Pesquisador" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emails">
+            <EntityTypeMapping TypeName="BugFeed.Database.Email">
+              <MappingFragment StoreEntitySet="Email">
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GruposFuncionarios">
+            <EntityTypeMapping TypeName="BugFeed.Database.GrupoFuncionarios">
+              <MappingFragment StoreEntitySet="GrupoFuncionarios">
+                <ScalarProperty Name="GrupoFuncionariosId" ColumnName="GrupoFuncionariosId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissoes">
+            <EntityTypeMapping TypeName="BugFeed.Database.Permissao">
+              <MappingFragment StoreEntitySet="Permissao">
+                <ScalarProperty Name="PermissaoId" ColumnName="PermissaoId" />
+                <ScalarProperty Name="Perfil" ColumnName="Perfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DadosBancarios">
+            <EntityTypeMapping TypeName="BugFeed.Database.DadosBancarios">
+              <MappingFragment StoreEntitySet="DadosBancarios">
+                <ScalarProperty Name="DadosBancariosId" ColumnName="DadosBancariosId" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="Agencia" ColumnName="Agencia" />
+                <ScalarProperty Name="DigitoAgencia" ColumnName="DigitoAgencia" />
+                <ScalarProperty Name="Conta" ColumnName="Conta" />
+                <ScalarProperty Name="DigitoConta" ColumnName="DigitoConta" />
+                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Enderecos">
+            <EntityTypeMapping TypeName="BugFeed.Database.Endereco">
+              <MappingFragment StoreEntitySet="Endereco">
+                <ScalarProperty Name="EnderecoId" ColumnName="EnderecoId" />
+                <ScalarProperty Name="Destinatario" ColumnName="Destinatario" />
+                <ScalarProperty Name="Organizacao" ColumnName="Organizacao" />
+                <ScalarProperty Name="Linha1" ColumnName="Linha1" />
+                <ScalarProperty Name="Linha2" ColumnName="Linha2" />
+                <ScalarProperty Name="Linha3" ColumnName="Linha3" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Formacoes">
+            <EntityTypeMapping TypeName="BugFeed.Database.Formacao">
+              <MappingFragment StoreEntitySet="Formacao">
+                <ScalarProperty Name="FormacaoId" ColumnName="FormacaoId" />
+                <ScalarProperty Name="TipoFormacao" ColumnName="TipoFormacao" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recompensas">
+            <EntityTypeMapping TypeName="BugFeed.Database.Recompensa">
+              <MappingFragment StoreEntitySet="Recompensa">
+                <ScalarProperty Name="RecompensaId" ColumnName="RecompensaId" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Processada" ColumnName="Processada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProgramasRecompensas">
+            <EntityTypeMapping TypeName="BugFeed.Database.ProgramaRecompensas">
+              <MappingFragment StoreEntitySet="ProgramaRecompensas">
+                <ScalarProperty Name="ProgramaRecompensasId" ColumnName="ProgramaRecompensasId" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="UltimaRevisao" ColumnName="UltimaRevisao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas">
+            <EntityTypeMapping TypeName="BugFeed.Database.Empresa">
+              <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="CNPJ" ColumnName="CNPJ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RelatoriosBug">
+            <EntityTypeMapping TypeName="BugFeed.Database.RelatorioBug">
+              <MappingFragment StoreEntitySet="RelatorioBug">
+                <ScalarProperty Name="RelatorioBugId" ColumnName="RelatorioBugId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Impacto" ColumnName="Impacto" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Retiradas">
+            <EntityTypeMapping TypeName="BugFeed.Database.Retirada">
+              <MappingFragment StoreEntitySet="Retirada">
+                <ScalarProperty Name="RetiradaId" ColumnName="RetiradaId" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="GrupoFuncionarios_Permissoes" TypeName="BugFeed.Database.GrupoFuncionarios_Permissoes" StoreEntitySet="Permissao">
+            <EndProperty Name="GrupoFuncionarios_Permissoes_Source">
+              <ScalarProperty Name="GrupoFuncionariosId" ColumnName="GrupoFuncionarios_GrupoFuncionariosId" />
+            </EndProperty>
+            <EndProperty Name="GrupoFuncionarios_Permissoes_Target">
+              <ScalarProperty Name="PermissaoId" ColumnName="PermissaoId" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="GrupoFuncionarios_GrupoFuncionariosId" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Funcionario_Grupo" TypeName="BugFeed.Database.Funcionario_Grupo" StoreEntitySet="Usuario">
+            <EndProperty Name="Funcionario_Grupo_Target">
+              <ScalarProperty Name="GrupoFuncionariosId" ColumnName="Grupo_GrupoFuncionariosId" />
+            </EndProperty>
+            <EndProperty Name="Funcionario_Grupo_Source">
+              <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Grupo_GrupoFuncionariosId" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="DadosBancarios_Pesquisador" TypeName="BugFeed.Database.DadosBancarios_Pesquisador" StoreEntitySet="DadosBancarios">
+            <EndProperty Name="DadosBancarios_Pesquisador_Target">
+              <ScalarProperty Name="UsuarioId" ColumnName="Pesquisador_UsuarioId" />
+            </EndProperty>
+            <EndProperty Name="DadosBancarios_Pesquisador_Source">
+              <ScalarProperty Name="DadosBancariosId" ColumnName="DadosBancariosId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Pesquisador_Endereco" TypeName="BugFeed.Database.Pesquisador_Endereco" StoreEntitySet="Usuario">
+            <EndProperty Name="Pesquisador_Endereco_Target">
+              <ScalarProperty Name="EnderecoId" ColumnName="Endereco_EnderecoId" />
+            </EndProperty>
+            <EndProperty Name="Pesquisador_Endereco_Source">
+              <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Endereco_EnderecoId" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Pesquisador_Formacoes" TypeName="BugFeed.Database.Pesquisador_Formacoes" StoreEntitySet="Formacao">
+            <EndProperty Name="Pesquisador_Formacoes_Source">
+              <ScalarProperty Name="UsuarioId" ColumnName="Pesquisador_UsuarioId" />
+            </EndProperty>
+            <EndProperty Name="Pesquisador_Formacoes_Target">
+              <ScalarProperty Name="FormacaoId" ColumnName="FormacaoId" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Pesquisador_UsuarioId" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Recompensa_Avaliador" TypeName="BugFeed.Database.Recompensa_Avaliador" StoreEntitySet="Recompensa">
+            <EndProperty Name="Recompensa_Avaliador_Target">
+              <ScalarProperty Name="UsuarioId" ColumnName="Avaliador_UsuarioId" />
+            </EndProperty>
+            <EndProperty Name="Recompensa_Avaliador_Source">
+              <ScalarProperty Name="RecompensaId" ColumnName="RecompensaId" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Avaliador_UsuarioId" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Recompensa_Pagador" TypeName="BugFeed.Database.Recompensa_Pagador" StoreEntitySet="Recompensa">
+            <EndProperty Name="Recompensa_Pagador_Target">
+              <ScalarProperty Name="UsuarioId" ColumnName="Pagador_UsuarioId" />
+            </EndProperty>
+            <EndProperty Name="Recompensa_Pagador_Source">
+              <ScalarProperty Name="RecompensaId" ColumnName="RecompensaId" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Pagador_UsuarioId" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Recompensa_Pesquisador" TypeName="BugFeed.Database.Recompensa_Pesquisador" StoreEntitySet="Recompensa">
+            <EndProperty Name="Recompensa_Pesquisador_Target">
+              <ScalarProperty Name="UsuarioId" ColumnName="Pesquisador_UsuarioId" />
+            </EndProperty>
+            <EndProperty Name="Recompensa_Pesquisador_Source">
+              <ScalarProperty Name="RecompensaId" ColumnName="RecompensaId" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Pesquisador_UsuarioId" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ComentarioPrograma_Programa" TypeName="BugFeed.Database.ComentarioPrograma_Programa" StoreEntitySet="Comentario">
+            <EndProperty Name="ComentarioPrograma_Programa_Target">
+              <ScalarProperty Name="ProgramaRecompensasId" ColumnName="Programa_ProgramaRecompensasId" />
+            </EndProperty>
+            <EndProperty Name="ComentarioPrograma_Programa_Source">
+              <ScalarProperty Name="ComentarioId" ColumnName="ComentarioId" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Programa_ProgramaRecompensasId" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Empresa_Endereco" TypeName="BugFeed.Database.Empresa_Endereco" StoreEntitySet="Empresa">
+            <EndProperty Name="Empresa_Endereco_Target">
+              <ScalarProperty Name="EnderecoId" ColumnName="Endereco_EnderecoId" />
+            </EndProperty>
+            <EndProperty Name="Empresa_Endereco_Source">
+              <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Endereco_EnderecoId" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Empresa_Funcionarios" TypeName="BugFeed.Database.Empresa_Funcionarios" StoreEntitySet="Usuario">
+            <EndProperty Name="Empresa_Funcionarios_Source">
+              <ScalarProperty Name="EmpresaId" ColumnName="Empresa_EmpresaId" />
+            </EndProperty>
+            <EndProperty Name="Empresa_Funcionarios_Target">
+              <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Empresa_EmpresaId" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ProgramaRecompensas_Empresa" TypeName="BugFeed.Database.ProgramaRecompensas_Empresa" StoreEntitySet="ProgramaRecompensas">
+            <EndProperty Name="ProgramaRecompensas_Empresa_Target">
+              <ScalarProperty Name="EmpresaId" ColumnName="Empresa_EmpresaId" />
+            </EndProperty>
+            <EndProperty Name="ProgramaRecompensas_Empresa_Source">
+              <ScalarProperty Name="ProgramaRecompensasId" ColumnName="ProgramaRecompensasId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ComentarioRelatorio_Relatorio" TypeName="BugFeed.Database.ComentarioRelatorio_Relatorio" StoreEntitySet="Comentario">
+            <EndProperty Name="ComentarioRelatorio_Relatorio_Target">
+              <ScalarProperty Name="RelatorioBugId" ColumnName="Relatorio_RelatorioBugId" />
+            </EndProperty>
+            <EndProperty Name="ComentarioRelatorio_Relatorio_Source">
+              <ScalarProperty Name="ComentarioId" ColumnName="ComentarioId" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Relatorio_RelatorioBugId" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RelatorioBug_Pesquisador" TypeName="BugFeed.Database.RelatorioBug_Pesquisador" StoreEntitySet="RelatorioBug">
+            <EndProperty Name="RelatorioBug_Pesquisador_Target">
+              <ScalarProperty Name="UsuarioId" ColumnName="Pesquisador_UsuarioId" />
+            </EndProperty>
+            <EndProperty Name="RelatorioBug_Pesquisador_Source">
+              <ScalarProperty Name="RelatorioBugId" ColumnName="RelatorioBugId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RelatorioBug_Programa" TypeName="BugFeed.Database.RelatorioBug_Programa" StoreEntitySet="RelatorioBug">
+            <EndProperty Name="RelatorioBug_Programa_Target">
+              <ScalarProperty Name="ProgramaRecompensasId" ColumnName="Programa_ProgramaRecompensasId" />
+            </EndProperty>
+            <EndProperty Name="RelatorioBug_Programa_Source">
+              <ScalarProperty Name="RelatorioBugId" ColumnName="RelatorioBugId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Recompensa_Programa" TypeName="BugFeed.Database.Recompensa_Programa" StoreEntitySet="Recompensa">
+            <EndProperty Name="Recompensa_Programa_Target">
+              <ScalarProperty Name="ProgramaRecompensasId" ColumnName="Programa_ProgramaRecompensasId" />
+            </EndProperty>
+            <EndProperty Name="Recompensa_Programa_Source">
+              <ScalarProperty Name="RecompensaId" ColumnName="RecompensaId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Retirada_DadosBancarios" TypeName="BugFeed.Database.Retirada_DadosBancarios" StoreEntitySet="Retirada">
+            <EndProperty Name="Retirada_DadosBancarios_Target">
+              <ScalarProperty Name="DadosBancariosId" ColumnName="DadosBancarios_DadosBancariosId" />
+            </EndProperty>
+            <EndProperty Name="Retirada_DadosBancarios_Source">
+              <ScalarProperty Name="RetiradaId" ColumnName="RetiradaId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Retirada_Pesquisador" TypeName="BugFeed.Database.Retirada_Pesquisador" StoreEntitySet="Retirada">
+            <EndProperty Name="Retirada_Pesquisador_Target">
+              <ScalarProperty Name="UsuarioId" ColumnName="Pesquisador_UsuarioId" />
+            </EndProperty>
+            <EndProperty Name="Retirada_Pesquisador_Source">
+              <ScalarProperty Name="RetiradaId" ColumnName="RetiradaId" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Pesquisador_UsuarioId" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Comentario_Usuario" TypeName="BugFeed.Database.Comentario_Usuario" StoreEntitySet="Comentario">
+            <EndProperty Name="Comentario_Usuario_Target">
+              <ScalarProperty Name="UsuarioId" ColumnName="Usuario_UsuarioId" />
+            </EndProperty>
+            <EndProperty Name="Comentario_Usuario_Source">
+              <ScalarProperty Name="ComentarioId" ColumnName="ComentarioId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </Mappings>
+    <StorageModels>
+      <Schema Namespace="CodeFirstDatabaseSchema" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comentario">
+          <Key>
+            <PropertyRef Name="ComentarioId" />
+          </Key>
+          <Property Name="ComentarioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Conteudo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DataHora" Type="datetime" Nullable="false" />
+          <Property Name="Apagado" Type="bit" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="UltimaRevisao" Type="datetime" Nullable="false" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Programa_ProgramaRecompensasId" Type="int" customannotation:Index="{ Name: IX_Programa_ProgramaRecompensasId, Order: 0 }" Nullable="true" />
+          <Property Name="Relatorio_RelatorioBugId" Type="int" customannotation:Index="{ Name: IX_Relatorio_RelatorioBugId, Order: 0 }" Nullable="true" />
+          <Property Name="Usuario_UsuarioId" Type="int" customannotation:Index="{ Name: IX_Usuario_UsuarioId, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sobrenome" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Senha" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+          <Property Name="DataNascimento" Type="datetime" Nullable="false" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Grupo_GrupoFuncionariosId" Type="int" customannotation:Index="{ Name: IX_Grupo_GrupoFuncionariosId, Order: 0 }" Nullable="true" />
+          <Property Name="Endereco_EnderecoId" Type="int" customannotation:Index="{ Name: IX_Endereco_EnderecoId, Order: 0 }" Nullable="true" />
+          <Property Name="Empresa_EmpresaId" Type="int" customannotation:Index="{ Name: IX_Empresa_EmpresaId, Order: 0 }" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="EmailId" Type="int" customannotation:Index="{ Name: IX_EmailId, Order: 0 }" Nullable="false" />
+          <Property Name="Endereco" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Confirmado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GrupoFuncionarios">
+          <Key>
+            <PropertyRef Name="GrupoFuncionariosId" />
+          </Key>
+          <Property Name="GrupoFuncionariosId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permissao">
+          <Key>
+            <PropertyRef Name="PermissaoId" />
+          </Key>
+          <Property Name="PermissaoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Perfil" Type="int" Nullable="false" />
+          <Property Name="GrupoFuncionarios_GrupoFuncionariosId" Type="int" customannotation:Index="{ Name: IX_GrupoFuncionarios_GrupoFuncionariosId, Order: 0 }" Nullable="true" />
+        </EntityType>
+        <EntityType Name="DadosBancarios">
+          <Key>
+            <PropertyRef Name="DadosBancariosId" />
+          </Key>
+          <Property Name="DadosBancariosId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CPF" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Agencia" Type="int" Nullable="false" />
+          <Property Name="DigitoAgencia" Type="int" Nullable="false" />
+          <Property Name="Conta" Type="int" Nullable="false" />
+          <Property Name="DigitoConta" Type="int" Nullable="false" />
+          <Property Name="Confirmado" Type="bit" Nullable="false" />
+          <Property Name="Pesquisador_UsuarioId" Type="int" customannotation:Index="{ Name: IX_Pesquisador_UsuarioId, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Endereco">
+          <Key>
+            <PropertyRef Name="EnderecoId" />
+          </Key>
+          <Property Name="EnderecoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Destinatario" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Organizacao" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Linha1" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Linha2" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Linha3" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Cidade" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bairro" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CEP" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pais" Type="nvarchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Formacao">
+          <Key>
+            <PropertyRef Name="FormacaoId" />
+          </Key>
+          <Property Name="FormacaoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoFormacao" Type="int" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Pesquisador_UsuarioId" Type="int" customannotation:Index="{ Name: IX_Pesquisador_UsuarioId, Order: 0 }" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Recompensa">
+          <Key>
+            <PropertyRef Name="RecompensaId" />
+          </Key>
+          <Property Name="RecompensaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Processada" Type="bit" Nullable="false" />
+          <Property Name="Avaliador_UsuarioId" Type="int" customannotation:Index="{ Name: IX_Avaliador_UsuarioId, Order: 0 }" Nullable="true" />
+          <Property Name="Pagador_UsuarioId" Type="int" customannotation:Index="{ Name: IX_Pagador_UsuarioId, Order: 0 }" Nullable="true" />
+          <Property Name="Pesquisador_UsuarioId" Type="int" customannotation:Index="{ Name: IX_Pesquisador_UsuarioId, Order: 0 }" Nullable="true" />
+          <Property Name="Programa_ProgramaRecompensasId" Type="int" customannotation:Index="{ Name: IX_Programa_ProgramaRecompensasId, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProgramaRecompensas">
+          <Key>
+            <PropertyRef Name="ProgramaRecompensasId" />
+          </Key>
+          <Property Name="ProgramaRecompensasId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+          <Property Name="DataCriacao" Type="datetime" Nullable="false" />
+          <Property Name="UltimaRevisao" Type="datetime" Nullable="false" />
+          <Property Name="Empresa_EmpresaId" Type="int" customannotation:Index="{ Name: IX_Empresa_EmpresaId, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="EmpresaId" />
+          </Key>
+          <Property Name="EmpresaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Site" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CNPJ" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Endereco_EnderecoId" Type="int" customannotation:Index="{ Name: IX_Endereco_EnderecoId, Order: 0 }" Nullable="true" />
+        </EntityType>
+        <EntityType Name="RelatorioBug">
+          <Key>
+            <PropertyRef Name="RelatorioBugId" />
+          </Key>
+          <Property Name="RelatorioBugId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Impacto" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+          <Property Name="Pesquisador_UsuarioId" Type="int" customannotation:Index="{ Name: IX_Pesquisador_UsuarioId, Order: 0 }" Nullable="false" />
+          <Property Name="Programa_ProgramaRecompensasId" Type="int" customannotation:Index="{ Name: IX_Programa_ProgramaRecompensasId, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Retirada">
+          <Key>
+            <PropertyRef Name="RetiradaId" />
+          </Key>
+          <Property Name="RetiradaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+          <Property Name="DadosBancarios_DadosBancariosId" Type="int" customannotation:Index="{ Name: IX_DadosBancarios_DadosBancariosId, Order: 0 }" Nullable="false" />
+          <Property Name="Pesquisador_UsuarioId" Type="int" customannotation:Index="{ Name: IX_Pesquisador_UsuarioId, Order: 0 }" Nullable="true" />
+        </EntityType>
+        <Association Name="Usuario_Email">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Email" Type="Self.Email" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Email">
+              <PropertyRef Name="EmailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GrupoFuncionarios_Permissoes">
+          <End Role="GrupoFuncionarios" Type="Self.GrupoFuncionarios" Multiplicity="0..1" />
+          <End Role="Permissao" Type="Self.Permissao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoFuncionarios">
+              <PropertyRef Name="GrupoFuncionariosId" />
+            </Principal>
+            <Dependent Role="Permissao">
+              <PropertyRef Name="GrupoFuncionarios_GrupoFuncionariosId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Funcionario_Grupo">
+          <End Role="GrupoFuncionarios" Type="Self.GrupoFuncionarios" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoFuncionarios">
+              <PropertyRef Name="GrupoFuncionariosId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Grupo_GrupoFuncionariosId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DadosBancarios_Pesquisador">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DadosBancarios" Type="Self.DadosBancarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="DadosBancarios">
+              <PropertyRef Name="Pesquisador_UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Pesquisador_Endereco">
+          <End Role="Endereco" Type="Self.Endereco" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Endereco">
+              <PropertyRef Name="EnderecoId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Endereco_EnderecoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Pesquisador_Formacoes">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Formacao" Type="Self.Formacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Formacao">
+              <PropertyRef Name="Pesquisador_UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Recompensa_Avaliador">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Recompensa" Type="Self.Recompensa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Recompensa">
+              <PropertyRef Name="Avaliador_UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Recompensa_Pagador">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Recompensa" Type="Self.Recompensa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Recompensa">
+              <PropertyRef Name="Pagador_UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Recompensa_Pesquisador">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Recompensa" Type="Self.Recompensa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Recompensa">
+              <PropertyRef Name="Pesquisador_UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ComentarioPrograma_Programa">
+          <End Role="ProgramaRecompensas" Type="Self.ProgramaRecompensas" Multiplicity="0..1" />
+          <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramaRecompensas">
+              <PropertyRef Name="ProgramaRecompensasId" />
+            </Principal>
+            <Dependent Role="Comentario">
+              <PropertyRef Name="Programa_ProgramaRecompensasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Empresa_Endereco">
+          <End Role="Endereco" Type="Self.Endereco" Multiplicity="0..1" />
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Endereco">
+              <PropertyRef Name="EnderecoId" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="Endereco_EnderecoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Empresa_Funcionarios">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="EmpresaId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Empresa_EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProgramaRecompensas_Empresa">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProgramaRecompensas" Type="Self.ProgramaRecompensas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="EmpresaId" />
+            </Principal>
+            <Dependent Role="ProgramaRecompensas">
+              <PropertyRef Name="Empresa_EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ComentarioRelatorio_Relatorio">
+          <End Role="RelatorioBug" Type="Self.RelatorioBug" Multiplicity="0..1" />
+          <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RelatorioBug">
+              <PropertyRef Name="RelatorioBugId" />
+            </Principal>
+            <Dependent Role="Comentario">
+              <PropertyRef Name="Relatorio_RelatorioBugId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RelatorioBug_Pesquisador">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RelatorioBug" Type="Self.RelatorioBug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="RelatorioBug">
+              <PropertyRef Name="Pesquisador_UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RelatorioBug_Programa">
+          <End Role="ProgramaRecompensas" Type="Self.ProgramaRecompensas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RelatorioBug" Type="Self.RelatorioBug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramaRecompensas">
+              <PropertyRef Name="ProgramaRecompensasId" />
+            </Principal>
+            <Dependent Role="RelatorioBug">
+              <PropertyRef Name="Programa_ProgramaRecompensasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Recompensa_Programa">
+          <End Role="ProgramaRecompensas" Type="Self.ProgramaRecompensas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Recompensa" Type="Self.Recompensa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramaRecompensas">
+              <PropertyRef Name="ProgramaRecompensasId" />
+            </Principal>
+            <Dependent Role="Recompensa">
+              <PropertyRef Name="Programa_ProgramaRecompensasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Retirada_DadosBancarios">
+          <End Role="DadosBancarios" Type="Self.DadosBancarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Retirada" Type="Self.Retirada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DadosBancarios">
+              <PropertyRef Name="DadosBancariosId" />
+            </Principal>
+            <Dependent Role="Retirada">
+              <PropertyRef Name="DadosBancarios_DadosBancariosId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Retirada_Pesquisador">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Retirada" Type="Self.Retirada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Retirada">
+              <PropertyRef Name="Pesquisador_UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Comentario_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Comentario">
+              <PropertyRef Name="Usuario_UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CodeFirstDatabase">
+          <EntitySet Name="Comentario" EntityType="Self.Comentario" Schema="dbo" Table="Comentarios" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" Table="Usuarios" />
+          <EntitySet Name="Email" EntityType="Self.Email" Schema="dbo" Table="Emails" />
+          <EntitySet Name="GrupoFuncionarios" EntityType="Self.GrupoFuncionarios" Schema="dbo" Table="GrupoFuncionarios" />
+          <EntitySet Name="Permissao" EntityType="Self.Permissao" Schema="dbo" Table="Permissaos" />
+          <EntitySet Name="DadosBancarios" EntityType="Self.DadosBancarios" Schema="dbo" Table="DadosBancarios" />
+          <EntitySet Name="Endereco" EntityType="Self.Endereco" Schema="dbo" Table="Enderecoes" />
+          <EntitySet Name="Formacao" EntityType="Self.Formacao" Schema="dbo" Table="Formacaos" />
+          <EntitySet Name="Recompensa" EntityType="Self.Recompensa" Schema="dbo" Table="Recompensas" />
+          <EntitySet Name="ProgramaRecompensas" EntityType="Self.ProgramaRecompensas" Schema="dbo" Table="ProgramaRecompensas" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" Table="Empresas" />
+          <EntitySet Name="RelatorioBug" EntityType="Self.RelatorioBug" Schema="dbo" Table="RelatorioBugs" />
+          <EntitySet Name="Retirada" EntityType="Self.Retirada" Schema="dbo" Table="Retiradas" />
+          <AssociationSet Name="Usuario_Email" Association="Self.Usuario_Email">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Email" EntitySet="Email" />
+          </AssociationSet>
+          <AssociationSet Name="GrupoFuncionarios_Permissoes" Association="Self.GrupoFuncionarios_Permissoes">
+            <End Role="GrupoFuncionarios" EntitySet="GrupoFuncionarios" />
+            <End Role="Permissao" EntitySet="Permissao" />
+          </AssociationSet>
+          <AssociationSet Name="Funcionario_Grupo" Association="Self.Funcionario_Grupo">
+            <End Role="GrupoFuncionarios" EntitySet="GrupoFuncionarios" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="DadosBancarios_Pesquisador" Association="Self.DadosBancarios_Pesquisador">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DadosBancarios" EntitySet="DadosBancarios" />
+          </AssociationSet>
+          <AssociationSet Name="Pesquisador_Endereco" Association="Self.Pesquisador_Endereco">
+            <End Role="Endereco" EntitySet="Endereco" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="Pesquisador_Formacoes" Association="Self.Pesquisador_Formacoes">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Formacao" EntitySet="Formacao" />
+          </AssociationSet>
+          <AssociationSet Name="Recompensa_Avaliador" Association="Self.Recompensa_Avaliador">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Recompensa" EntitySet="Recompensa" />
+          </AssociationSet>
+          <AssociationSet Name="Recompensa_Pagador" Association="Self.Recompensa_Pagador">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Recompensa" EntitySet="Recompensa" />
+          </AssociationSet>
+          <AssociationSet Name="Recompensa_Pesquisador" Association="Self.Recompensa_Pesquisador">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Recompensa" EntitySet="Recompensa" />
+          </AssociationSet>
+          <AssociationSet Name="ComentarioPrograma_Programa" Association="Self.ComentarioPrograma_Programa">
+            <End Role="ProgramaRecompensas" EntitySet="ProgramaRecompensas" />
+            <End Role="Comentario" EntitySet="Comentario" />
+          </AssociationSet>
+          <AssociationSet Name="Empresa_Endereco" Association="Self.Empresa_Endereco">
+            <End Role="Endereco" EntitySet="Endereco" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="Empresa_Funcionarios" Association="Self.Empresa_Funcionarios">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="ProgramaRecompensas_Empresa" Association="Self.ProgramaRecompensas_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="ProgramaRecompensas" EntitySet="ProgramaRecompensas" />
+          </AssociationSet>
+          <AssociationSet Name="ComentarioRelatorio_Relatorio" Association="Self.ComentarioRelatorio_Relatorio">
+            <End Role="RelatorioBug" EntitySet="RelatorioBug" />
+            <End Role="Comentario" EntitySet="Comentario" />
+          </AssociationSet>
+          <AssociationSet Name="RelatorioBug_Pesquisador" Association="Self.RelatorioBug_Pesquisador">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="RelatorioBug" EntitySet="RelatorioBug" />
+          </AssociationSet>
+          <AssociationSet Name="RelatorioBug_Programa" Association="Self.RelatorioBug_Programa">
+            <End Role="ProgramaRecompensas" EntitySet="ProgramaRecompensas" />
+            <End Role="RelatorioBug" EntitySet="RelatorioBug" />
+          </AssociationSet>
+          <AssociationSet Name="Recompensa_Programa" Association="Self.Recompensa_Programa">
+            <End Role="ProgramaRecompensas" EntitySet="ProgramaRecompensas" />
+            <End Role="Recompensa" EntitySet="Recompensa" />
+          </AssociationSet>
+          <AssociationSet Name="Retirada_DadosBancarios" Association="Self.Retirada_DadosBancarios">
+            <End Role="DadosBancarios" EntitySet="DadosBancarios" />
+            <End Role="Retirada" EntitySet="Retirada" />
+          </AssociationSet>
+          <AssociationSet Name="Retirada_Pesquisador" Association="Self.Retirada_Pesquisador">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Retirada" EntitySet="Retirada" />
+          </AssociationSet>
+          <AssociationSet Name="Comentario_Usuario" Association="Self.Comentario_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Comentario" EntitySet="Comentario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </StorageModels>
+  </Runtime>
+  <Designer>
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <Diagrams >
+      <Diagram DiagramId="6fdeddb530ce42c48fe981cc987b36f0" Name="Diagram1">
+        <EntityTypeShape EntityType="BugFeed.Database.Comentario" Width="1.5" PointX="2" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.Usuario" Width="1.5" PointX="4.125" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.Email" Width="1.5" PointX="6.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.Funcionario" Width="1.5" PointX="6.625" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.GrupoFuncionarios" Width="1.875" PointX="8.625" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.Permissao" Width="1.5" PointX="7.125" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.Pesquisador" Width="1.5" PointX="6.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.DadosBancarios" Width="1.5" PointX="1.375" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.Endereco" Width="1.5" PointX="8.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.Formacao" Width="1.5" PointX="5.375" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.Recompensa" Width="1.5" PointX="1.875" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.ProgramaRecompensas" Width="2" PointX="1.375" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.ComentarioPrograma" Width="2" PointX="8.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.Empresa" Width="1.5" PointX="8.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.RelatorioBug" Width="1.5" PointX="4.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.ComentarioRelatorio" Width="2" PointX="4.125" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugFeed.Database.Retirada" Width="1.5" PointX="3.5" PointY="9.875" IsExpanded="true" />
+        <InheritanceConnector EntityType="BugFeed.Database.Funcionario" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="BugFeed.Database.Pesquisador" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="BugFeed.Database.ComentarioPrograma" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="BugFeed.Database.ComentarioRelatorio" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.Usuario_Email" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.GrupoFuncionarios_Permissoes" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.Funcionario_Grupo" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.DadosBancarios_Pesquisador" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.Pesquisador_Endereco" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.Pesquisador_Formacoes" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.Recompensa_Avaliador" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.Recompensa_Pagador" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.Recompensa_Pesquisador" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.ComentarioPrograma_Programa" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.Empresa_Endereco" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.Empresa_Funcionarios" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.ProgramaRecompensas_Empresa" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.ComentarioRelatorio_Relatorio" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.RelatorioBug_Pesquisador" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.RelatorioBug_Programa" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.Recompensa_Programa" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.Retirada_DadosBancarios" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.Retirada_Pesquisador" ManuallyRouted="false" />
+        <AssociationConnector Association="BugFeed.Database.Comentario_Usuario" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</Edmx>
