@@ -1,0 +1,5 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPages/BaseMasterPage.master" AutoEventWireup="true" CodeBehind="SplashScreenMasterPage.master.cs" Inherits="BugFeed.MasterPages.SplashScreenMasterPage" %>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+  <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>

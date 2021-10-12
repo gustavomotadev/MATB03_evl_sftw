@@ -1,0 +1,724 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.8.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.8.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6546ABF8-D58B-43A2-A324-EA90DBF35D63}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BugFeed</RootNamespace>
+    <AssemblyName>BugFeed</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.6.4\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.6.4\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.6.4\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.6.4\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.6.4\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.6.4\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.3\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.MSAjax, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="UnconstrainedMelody, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UnconstrainedMelody.0.2.1\lib\UnconstrainedMelody.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\ResetPassword.aspx" />
+    <Content Include="App_Data\BugFeed.mdf" />
+    <Content Include="App_Data\BugFeed_log.ldf">
+      <DependentUpon>BugFeed.mdf</DependentUpon>
+    </Content>
+    <Content Include="assets\css\app.css" />
+    <Content Include="assets\img\home.jpg" />
+    <Content Include="assets\img\Logo%402x.png" />
+    <Content Include="assets\img\Logo.png" />
+    <Content Include="assets\img\avatar_example.jpg" />
+    <Content Include="assets\img\user-profile-display.png" />
+    <Content Include="assets\js\app.js" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\lib\bootstrap-slider\bootstrap-slider.js" />
+    <Content Include="assets\lib\bootstrap-slider\bootstrap-slider.min.js" />
+    <Content Include="assets\lib\bootstrap-slider\css\bootstrap-slider.css" />
+    <Content Include="assets\lib\bootstrap-slider\css\bootstrap-slider.min.css" />
+    <Content Include="assets\lib\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="assets\lib\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="assets\lib\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="assets\lib\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="assets\lib\bootstrap\css\bootstrap.css" />
+    <Content Include="assets\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\lib\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="assets\lib\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="assets\lib\bootstrap\js\bootstrap.js" />
+    <Content Include="assets\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\lib\datetimepicker\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="assets\lib\datetimepicker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="assets\lib\fuelux\css\fuelux.css" />
+    <Content Include="assets\lib\fuelux\css\fuelux.min.css" />
+    <Content Include="assets\lib\fuelux\fonts\fuelux.svg" />
+    <Content Include="assets\lib\fuelux\js\fuelux.js" />
+    <Content Include="assets\lib\fuelux\js\fuelux.min.js" />
+    <Content Include="assets\lib\fuelux\templates\underscore\bootstrap\button-group.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\bootstrap\button.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\bootstrap\file-button.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\bootstrap\input-with-button-dropdown.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\bootstrap\input-with-checkbox.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\bootstrap\input-with-text.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\bootstrap\input.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\bootstrap\select.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\bootstrap\textarea.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\fuelux\checkboxes-inline.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\fuelux\checkboxes.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\fuelux\input-with-combobox.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\fuelux\radios-inline.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\fuelux\radios.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\fuelux\search.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\fuelux\selectlist.html" />
+    <Content Include="assets\lib\fuelux\templates\underscore\fuelux\spinbox.html" />
+    <Content Include="assets\lib\jquery.maskedinput\jquery.maskedinput.js" />
+    <Content Include="assets\lib\jquery\jquery.min.js" />
+    <Content Include="assets\lib\material-design-icons\css\material-design-iconic-font.css" />
+    <Content Include="assets\lib\material-design-icons\css\material-design-iconic-font.min.css" />
+    <Content Include="assets\lib\material-design-icons\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="assets\lib\moneymask\js\jquery.maskMoney.js" />
+    <Content Include="assets\lib\moneymask\js\jquery.maskMoney.min.js" />
+    <Content Include="assets\lib\perfect-scrollbar\css\perfect-scrollbar.css" />
+    <Content Include="assets\lib\perfect-scrollbar\css\perfect-scrollbar.min.css" />
+    <Content Include="assets\lib\perfect-scrollbar\js\perfect-scrollbar.jquery.js" />
+    <Content Include="assets\lib\perfect-scrollbar\js\perfect-scrollbar.jquery.min.js" />
+    <Content Include="assets\lib\perfect-scrollbar\js\perfect-scrollbar.js" />
+    <Content Include="assets\lib\perfect-scrollbar\js\perfect-scrollbar.min.js" />
+    <Content Include="assets\lib\roboto\Roboto-Black.svg" />
+    <Content Include="assets\lib\roboto\Roboto-BlackItalic.svg" />
+    <Content Include="assets\lib\roboto\Roboto-Bold.svg" />
+    <Content Include="assets\lib\roboto\Roboto-BoldItalic.svg" />
+    <Content Include="assets\lib\roboto\Roboto-Light.svg" />
+    <Content Include="assets\lib\roboto\Roboto-LightItalic.svg" />
+    <Content Include="assets\lib\roboto\Roboto-Medium.svg" />
+    <Content Include="assets\lib\roboto\Roboto-MediumItalic.svg" />
+    <Content Include="assets\lib\roboto\Roboto-Regular.svg" />
+    <Content Include="assets\lib\roboto\Roboto-RegularItalic.svg" />
+    <Content Include="assets\lib\roboto\Roboto-Thin.svg" />
+    <Content Include="assets\lib\roboto\Roboto-ThinItalic.svg" />
+    <Content Include="assets\css\main.css" />
+    <Content Include="assets\lib\select2\css\select2.min.css" />
+    <Content Include="assets\lib\select2\js\select2.full.min.js" />
+    <Content Include="assets\lib\select2\js\select2.min.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-ar-AR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-bg-BG.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-ca-ES.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-cs-CZ.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-da-DK.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-de-DE.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-el-GR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-es-ES.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-es-EU.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-fa-IR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-fi-FI.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-fr-FR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-gl-ES.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-he-IL.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-hr-HR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-hu-HU.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-id-ID.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-it-IT.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-ja-JP.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-ko-KR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-lt-LT.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-lt-LV.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-mn-MN.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-nb-NO.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-nl-NL.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-pl-PL.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-pt-BR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-pt-PT.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-ro-RO.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-ru-RU.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-sk-SK.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-sl-SI.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-sr-RS-Latin.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-sr-RS.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-sv-SE.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-ta-IN.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-th-TH.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-tr-TR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-uk-UA.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-vi-VN.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-zh-CN.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-zh-TW.js" />
+    <Content Include="assets\lib\summernote\plugin\databasic\summernote-ext-databasic.css" />
+    <Content Include="assets\lib\summernote\plugin\databasic\summernote-ext-databasic.js" />
+    <Content Include="assets\lib\summernote\plugin\hello\summernote-ext-hello.js" />
+    <Content Include="assets\lib\summernote\plugin\specialchars\summernote-ext-specialchars.js" />
+    <Content Include="assets\lib\summernote\summernote-bs4.css" />
+    <Content Include="assets\lib\summernote\summernote-bs4.js" />
+    <Content Include="assets\lib\summernote\summernote-bs4.min.js" />
+    <Content Include="assets\lib\summernote\summernote-ext-beagle.js" />
+    <Content Include="assets\lib\summernote\summernote-lite.css" />
+    <Content Include="assets\lib\summernote\summernote-lite.js" />
+    <Content Include="assets\lib\summernote\summernote.css" />
+    <Content Include="assets\lib\summernote\summernote.js" />
+    <Content Include="assets\lib\summernote\summernote.min.js" />
+    <Content Include="Controls\Elements\Alert.ascx" />
+    <Content Include="Controls\Elements\DatePicker.ascx" />
+    <Content Include="Controls\CadastroUsuarioControl.ascx" />
+    <Content Include="Dashboard\Pesquisador\Default.aspx" />
+    <Content Include="Dashboard\Pesquisador\EnviarRelatorio.aspx" />
+    <Content Include="Dashboard\Pesquisador\Profile.aspx" />
+    <Content Include="Dashboard\Pesquisador\Programa.aspx" />
+    <Content Include="Dashboard\Pesquisador\Recompensas.aspx" />
+    <Content Include="Dashboard\Pesquisador\RelatoriosEnviados.aspx" />
+    <Content Include="Dashboard\Programas\AnalisarRelatorios.aspx" />
+    <Content Include="Dashboard\Pesquisador\ProgramasAbertos.aspx" />
+    <Content Include="Dashboard\Programas\Default.aspx" />
+    <Content Include="Dashboard\Programas\ListaRelatorios.aspx" />
+    <Content Include="Dashboard\Programas\Novo.aspx" />
+    <Content Include="Dashboard\Programas\Relatorio.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="Account\SignOut.aspx" />
+    <Content Include="SignUp\Business.aspx" />
+    <Content Include="Dashboard\Default.aspx" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="assets\lib\material-design-icons\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="assets\lib\material-design-icons\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="assets\lib\material-design-icons\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="assets\lib\material-design-icons\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="Account\SignIn.aspx" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="SignUp\User.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Elements\DatePicker.ascx.cs">
+      <DependentUpon>DatePicker.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Elements\DatePicker.ascx.designer.cs">
+      <DependentUpon>DatePicker.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Elements\Alert.ascx.cs">
+      <DependentUpon>Alert.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Elements\Alert.ascx.designer.cs">
+      <DependentUpon>Alert.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CadastroUsuarioControl.ascx.cs">
+      <DependentUpon>CadastroUsuarioControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\CadastroUsuarioControl.ascx.designer.cs">
+      <DependentUpon>CadastroUsuarioControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\Pesquisador\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard\Pesquisador\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\Pesquisador\EnviarRelatorio.aspx.cs">
+      <DependentUpon>EnviarRelatorio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard\Pesquisador\EnviarRelatorio.aspx.designer.cs">
+      <DependentUpon>EnviarRelatorio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\Pesquisador\Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard\Pesquisador\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\Pesquisador\Programa.aspx.cs">
+      <DependentUpon>Programa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard\Pesquisador\Programa.aspx.designer.cs">
+      <DependentUpon>Programa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\Pesquisador\Recompensas.aspx.cs">
+      <DependentUpon>Recompensas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard\Pesquisador\Recompensas.aspx.designer.cs">
+      <DependentUpon>Recompensas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\Pesquisador\RelatoriosEnviados.aspx.cs">
+      <DependentUpon>RelatoriosEnviados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard\Pesquisador\RelatoriosEnviados.aspx.designer.cs">
+      <DependentUpon>RelatoriosEnviados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\Programas\AnalisarRelatorios.aspx.cs">
+      <DependentUpon>AnalisarRelatorios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard\Pesquisador\ProgramasAbertos.aspx.cs">
+      <DependentUpon>ProgramasAbertos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard\Pesquisador\ProgramasAbertos.aspx.designer.cs">
+      <DependentUpon>ProgramasAbertos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\Programas\AnalisarRelatorios.aspx.designer.cs">
+      <DependentUpon>AnalisarRelatorios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\Programas\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard\Programas\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\Programas\ListaRelatorios.aspx.cs">
+      <DependentUpon>ListaRelatorios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard\Programas\ListaRelatorios.aspx.designer.cs">
+      <DependentUpon>ListaRelatorios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\Programas\Novo.aspx.cs">
+      <DependentUpon>Novo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard\Programas\Novo.aspx.designer.cs">
+      <DependentUpon>Novo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\Programas\Relatorio.aspx.cs">
+      <DependentUpon>Relatorio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard\Programas\Relatorio.aspx.designer.cs">
+      <DependentUpon>Relatorio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPages\Dashboard\FuncionarioMasterPage.master.cs">
+      <DependentUpon>FuncionarioMasterPage.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPages\Dashboard\FuncionarioMasterPage.master.designer.cs">
+      <DependentUpon>FuncionarioMasterPage.master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPages\Dashboard\PesquisadorMasterPage.master.cs">
+      <DependentUpon>PesquisadorMasterPage.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPages\Dashboard\PesquisadorMasterPage.master.designer.cs">
+      <DependentUpon>PesquisadorMasterPage.master</DependentUpon>
+    </Compile>
+    <Compile Include="Account\SignOut.aspx.cs">
+      <DependentUpon>SignOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\SignOut.aspx.designer.cs">
+      <DependentUpon>SignOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Dashboard\DashboardPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Properties\Urls.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Urls.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SignUp\Business.aspx.cs">
+      <DependentUpon>Business.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SignUp\Business.aspx.designer.cs">
+      <DependentUpon>Business.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Account\SignIn.aspx.cs">
+      <DependentUpon>SignIn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\SignIn.aspx.designer.cs">
+      <DependentUpon>SignIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPages\BaseMasterPage.master.cs">
+      <DependentUpon>BaseMasterPage.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPages\BaseMasterPage.master.designer.cs">
+      <DependentUpon>BaseMasterPage.master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPages\Dashboard\DashboardMasterPage.master.cs">
+      <DependentUpon>DashboardMasterPage.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPages\Dashboard\DashboardMasterPage.master.designer.cs">
+      <DependentUpon>DashboardMasterPage.master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPages\SplashScreenMasterPage.master.cs">
+      <DependentUpon>SplashScreenMasterPage.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPages\SplashScreenMasterPage.master.designer.cs">
+      <DependentUpon>SplashScreenMasterPage.master</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebForm.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignUp\User.aspx.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SignUp\User.aspx.designer.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\lib\roboto\Roboto-Black.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Black.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-Black.woff" />
+    <Content Include="assets\lib\roboto\Roboto-Black.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-BlackItalic.eot" />
+    <Content Include="assets\lib\roboto\Roboto-BlackItalic.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-BlackItalic.woff" />
+    <Content Include="assets\lib\roboto\Roboto-BlackItalic.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-Bold.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Bold.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-Bold.woff" />
+    <Content Include="assets\lib\roboto\Roboto-Bold.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-BoldItalic.eot" />
+    <Content Include="assets\lib\roboto\Roboto-BoldItalic.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-BoldItalic.woff" />
+    <Content Include="assets\lib\roboto\Roboto-BoldItalic.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-Light.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Light.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-Light.woff" />
+    <Content Include="assets\lib\roboto\Roboto-Light.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-LightItalic.eot" />
+    <Content Include="assets\lib\roboto\Roboto-LightItalic.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-LightItalic.woff" />
+    <Content Include="assets\lib\roboto\Roboto-LightItalic.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-Medium.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Medium.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-Medium.woff" />
+    <Content Include="assets\lib\roboto\Roboto-Medium.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-MediumItalic.eot" />
+    <Content Include="assets\lib\roboto\Roboto-MediumItalic.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-MediumItalic.woff" />
+    <Content Include="assets\lib\roboto\Roboto-MediumItalic.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-Regular.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Regular.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-Regular.woff" />
+    <Content Include="assets\lib\roboto\Roboto-Regular.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-RegularItalic.eot" />
+    <Content Include="assets\lib\roboto\Roboto-RegularItalic.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-RegularItalic.woff" />
+    <Content Include="assets\lib\roboto\Roboto-RegularItalic.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-Thin.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Thin.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-Thin.woff" />
+    <Content Include="assets\lib\roboto\Roboto-Thin.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-ThinItalic.eot" />
+    <Content Include="assets\lib\roboto\Roboto-ThinItalic.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-ThinItalic.woff" />
+    <Content Include="assets\lib\roboto\Roboto-ThinItalic.woff2" />
+    <Content Include="MasterPages\BaseMasterPage.master" />
+    <Content Include="MasterPages\SplashScreenMasterPage.master" />
+    <Content Include="MasterPages\Dashboard\DashboardMasterPage.master" />
+    <Content Include="assets\lib\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="assets\lib\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="assets\lib\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="assets\lib\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="assets\lib\bootstrap\css\bootstrap.css.map" />
+    <Content Include="assets\lib\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="assets\lib\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="assets\lib\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="assets\lib\bootstrap\js\bootstrap.js.map" />
+    <Content Include="assets\lib\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="MasterPages\Dashboard\PesquisadorMasterPage.master" />
+    <Content Include="MasterPages\Dashboard\FuncionarioMasterPage.master" />
+    <Content Include="assets\lib\summernote\font\summernote.eot" />
+    <Content Include="assets\lib\summernote\font\summernote.ttf" />
+    <Content Include="assets\lib\summernote\font\summernote.woff" />
+    <Content Include="assets\lib\fuelux\css\fuelux.css.map" />
+    <Content Include="assets\lib\fuelux\fonts\fuelux.eot" />
+    <Content Include="assets\lib\fuelux\fonts\fuelux.ttf" />
+    <Content Include="assets\lib\fuelux\fonts\fuelux.woff" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\bootstrap\button.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\bootstrap\input.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\bootstrap\modal-trigger.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\bootstrap\modal.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\bootstrap\textarea.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\checkbox.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\combobox.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\datepicker.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\infinite-scroll.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\loader.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\pillbox.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\placard.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\radio.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\repeater.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\scheduler.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\search.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\selectlist.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\spinbox.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\tree.hbs" />
+    <Content Include="assets\lib\fuelux\templates\handlebars\fuelux\wizard.hbs" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\BugFeed20180610103031 - Web Deploy.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BugFeed.DAL\BugFeed.DAL.csproj">
+      <Project>{3a658d56-24a9-4458-b270-8f1f11d89a90}</Project>
+      <Name>BugFeed.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BugFeed.Database\BugFeed.Database.csproj">
+      <Project>{d4cfc735-af3c-440f-a3e5-154818ae9d55}</Project>
+      <Name>BugFeed.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BugFeed.Objects\BugFeed.Objects.csproj">
+      <Project>{88265547-1752-4370-B836-2E6BE94613D6}</Project>
+      <Name>BugFeed.Objects</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Urls.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Urls.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58149</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:58149/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.8.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.8.2\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

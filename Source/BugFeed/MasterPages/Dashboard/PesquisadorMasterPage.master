@@ -1,0 +1,40 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPages/Dashboard/DashboardMasterPage.master" AutoEventWireup="true" CodeBehind="PesquisadorMasterPage.master.cs" Inherits="BugFeed.MasterPages.Dashboard.PesquisadorMasterPage" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="LeftSidebar" runat="server">
+  <div class="be-left-sidebar">
+    <div class="left-sidebar-wrapper">
+      <a href="#" class="left-sidebar-toggle">Dashboard</a>
+      <div class="left-sidebar-spacer">
+        <div class="left-sidebar-scroll ps-container ps-theme-default" data-ps-id="56574a85-e1f3-4b41-3e6a-f70935c41007">
+          <div class="left-sidebar-content">
+            <ul class="sidebar-elements">
+              <li class="divider">Menu</li>
+              <li>
+                <a href="/Dashboard/Pesquisador/"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
+              </li>
+              <li>
+                <a href="/Dashboard/Pesquisador/ProgramasAbertos.aspx"><i class="icon mdi mdi-collection-text"></i><span>Programas abertos</span></a>
+              </li>
+              <li>
+                <a href="/Dashboard/Pesquisador/RelatoriosEnviados.aspx"><i class="icon mdi mdi-comment-list"></i><span>Relatórios enviados</span></a>
+              </li>
+              <li>
+                <a href="/Dashboard/Pesquisador/Recompensas.aspx"><i class="icon mdi mdi-money"></i><span>Minhas recompensas</span></a>
+              </li>
+            </ul>
+          </div>
+          <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
+            <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+          </div>
+          <div class="ps-scrollbar-y-rail" style="top: 0px; right: 0px;">
+            <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+  <asp:ContentPlaceHolder ID="MainContent" runat="server">
+  </asp:ContentPlaceHolder>
+</asp:Content>

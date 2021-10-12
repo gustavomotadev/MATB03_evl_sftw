@@ -1,0 +1,47 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="BaseMasterPage.master.cs" Inherits="BugFeed.MasterPages.BaseMasterPage" %>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head runat="server">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%: Page.Title %> - BugFeed</title>
+  <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link rel="stylesheet" type="text/css" href="/assets/lib/material-design-icons/css/material-design-iconic-font.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/lib/perfect-scrollbar/css/perfect-scrollbar.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/lib/select2/css/select2.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/lib/bootstrap-slider/css/bootstrap-slider.min.css">
+  <!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="/assets/lib/summernote/summernote-bs4.css" type="text/css"/>
+  <link rel="stylesheet" href="/assets/css/app.css" type="text/css">
+  <link rel="stylesheet" href="/assets/css/main.css" type="text/css">
+</head>
+
+<body runat="server" id="body">
+  <form runat="server">
+    <asp:ScriptManager runat="server"></asp:ScriptManager>
+    <div id="loader-wrapper" style="display: none;">
+      <div id="loader"></div>
+    </div>
+    <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+  </form>
+  <script src="/assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
+  <script src="/assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+  <script src="/assets/lib/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+  <script src="/assets/lib/jquery.maskedinput/jquery.maskedinput.js" type="text/javascript"></script>
+  <script src="/assets/lib/select2/js/select2.min.js" type="text/javascript"></script>
+  <script src="/assets/lib/datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+  <script src="/assets/lib/bootstrap-slider/bootstrap-slider.min.js" type="text/javascript"></script>
+  <script src="/assets/lib/summernote/summernote-bs4.js" type="text/javascript"></script>
+  <script src="/assets/lib/summernote/summernote-ext-beagle.js" type="text/javascript"></script>
+  <script src="/assets/lib/fuelux/js/fuelux.min.js"></script>
+  <script src="/assets/lib/moneymask/js/jquery.maskMoney.min.js"></script>
+  <script src="/assets/js/app.js" type="text/javascript"></script>
+  <script src="/assets/js/main.js" type="text/javascript"></script>
+</body>
+</html>
