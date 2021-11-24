@@ -3,7 +3,7 @@
   <div data-min-view="2" data-date-format="dd-mm-yyyy" class="input-group date datetimepicker">
     <asp:TextBox runat="server" ID="txtDateTime" CssClass="form-control" placeholder="Data de Nascimento"></asp:TextBox>
     <div class="input-group-append">
-      <button class="btn btn-primary"><i class="icon-th mdi mdi-calendar"></i></button>
+      <button class="btn btn-primary"><em class="icon-th mdi mdi-calendar"></em></button>
     </div>
   </div>
 </div>
