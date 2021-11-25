@@ -20,7 +20,7 @@
                 <asp:Repeater runat="server" ID="rptRecompensas" OnItemDataBound="rptRecompensas_ItemDataBound">
                   <HeaderTemplate>
                     <div class="table-responsive noSwipe">
-                      <table class="table table-striped table-hover" aria-labe="Recompensas">
+                      <table class="table table-striped table-hover" aria-label="Recompensas">
                         <thead>
                           <tr>
                             <th style="width: 5%;"></th>
