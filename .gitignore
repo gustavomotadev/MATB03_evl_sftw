@@ -260,5 +260,5 @@ paket-files/
 __pycache__/
 *.pyc
 
-Source/BugFeed/assets/lib/*.*
-Source/BugFeed/Scripts/*.*
+Source/BugFeed/assets/lib/
+Source/BugFeed/Scripts/
