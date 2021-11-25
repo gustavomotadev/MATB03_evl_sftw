@@ -40,6 +40,8 @@
           <ul class="nav navbar-nav float-right" id="loggedOutMenu" runat="server">
             <li class="nav-item"><a href="/Account/SignIn.aspx" class="nav-link">Fazer login</a></li>
           </ul>
+
+          <!-- Remoção de feature do dropdown menu -->
           <!--
           <ul class="nav navbar-nav float-right be-user-nav" id="loggedInMenu" runat="server" visible="false">
             <li class="nav-item dropdown">
