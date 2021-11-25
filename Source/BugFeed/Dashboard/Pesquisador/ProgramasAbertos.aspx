@@ -13,7 +13,7 @@
                 <asp:Repeater runat="server" ID="rptProgramas" OnItemDataBound="rptProgramas_ItemDataBound">
                   <HeaderTemplate>
                     <div class="table-responsive noSwipe">
-                      <table class="table table-striped table-hover">
+                      <table class="table table-striped table-hover" aria-label="RelatoriosEnviados">
                         <thead>
                           <tr>
                             <th>Empresa</th>
