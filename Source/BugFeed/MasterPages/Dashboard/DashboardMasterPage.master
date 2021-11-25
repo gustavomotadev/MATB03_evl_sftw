@@ -21,12 +21,13 @@
           <!-- Page title -->
           <div class="page-title"><span><%: Page.Title %></span></div>
 
+          <!-- Adição de feature do botão de logoff -->
           <ul class="nav navbar-nav float-right be-user-nav">
             <li class="nav-item"><a href="/Account/SignOut.aspx" class="nav-link">Fazer logout</a></li>
           </ul>
 
-          <%-- Remoção de feature do dropdown menu -->
-          <!-- 
+          <!-- Remoção de feature do dropdown menu -->
+          <%-- 
           <ul class="nav navbar-nav float-right be-user-nav">
             <li class="nav-item dropdown">
               <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
