@@ -40,7 +40,7 @@
           <ul class="nav navbar-nav float-right" id="loggedOutMenu" runat="server">
             <li class="nav-item"><a href="/Account/SignIn.aspx" class="nav-link">Fazer login</a></li>
           </ul>
-
+          <!--
           <ul class="nav navbar-nav float-right be-user-nav" id="loggedInMenu" runat="server" visible="false">
             <li class="nav-item dropdown">
               <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
@@ -64,6 +64,7 @@
               </div>
             </li>
           </ul>
+          -->
         </div>
 
         <div id="be-navbar-collapse" class="navbar-collapse collapse">
